@@ -2,8 +2,14 @@ class Robot
   attr_accessor :position, :facing
 
   def place x, y, facing
-    @position = Position.new(x, y)
-    @facing = Facing.new(facing)
+    new_position = Position.new(x, y)
+    new_facing = Facing.new(facing)
+
+    if new_position.valid? && new_facing.valid?
+      @position, @facing = new_position, new_facing
+    end
+
+    self
   end
 
   def placed?
@@ -12,26 +18,27 @@ class Robot
 
   def move
     placed? && moves.fetch(facing.direction).call(position)
+    self
   end
 
   def left
     placed? && facing.previous
+    self
   end
 
   def right
     placed? && facing.next
+    self
   end
 
   def report
-    to_s
+    table = 5.times.map { Array.new(5, '-') }
+    table[position.x][position.y] = facing.to_code
+    table.inject('') { |acc, row| acc << '|' << row.join('') << "|\n" }
   end
 
   def to_s
-    "#{position}, facing: #{facing}"
-  end
-
-  def inspect
-    "<Robot##{object_id},#{self}> "
+    "position: #{position}, facing: #{facing}"
   end
 
   private

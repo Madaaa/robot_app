@@ -18,8 +18,11 @@ class Commander
   end
 
   def execute command, args = []
-    if length = commands[command]
-      robot.public_send(command, *args.first(length))
+    command = command.to_s.downcase.to_sym
+    length = commands[command]
+
+    if length == args.length
+      robot.public_send(command, *args)
     else
       "Invalid command\n\n#{help}"
     end

@@ -1,10 +1,10 @@
 class PositionValidator
   def horizontal
-    1..3
+    0..4
   end
 
   def vertical
-    1..3
+    0..4
   end
 
   def when_vertical_valid? val

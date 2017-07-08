@@ -8,11 +8,19 @@ class Facing
     3 => :west
   }
 
+  CODIFICATIONS = {
+    north: 'ʌ',
+    east: '>',
+    south: 'v',
+    west: '<'
+  }
+
   def initialize direction
-    direction = direction.to_s.downcase.to_sym
-    @direction = if self.class.valid? direction
-      direction
-    end
+    @direction = direction.to_s.downcase.to_sym
+  end
+
+  def valid?
+    valid_directions.include? direction
   end
 
   def order
@@ -20,28 +28,30 @@ class Facing
   end
 
   def next
-    directions[order.next.modulo(directions.size)]
+    @direction = directions[order.next.modulo(directions.size)]
   end
 
   def previous
-    directions[order.pred.modulo(directions.size)]
+    @direction = directions[order.pred.modulo(directions.size)]
   end
 
   def directions
     DIRECTIONS.freeze
   end
 
+  def valid_directions
+    DIRECTIONS.values
+  end
+
   def to_s
     direction.to_s
   end
 
-  class << self
-    def valid? direction
-      valid_directions.include? direction
-    end
+  def to_code
+    CODIFICATIONS[direction]
+  end
 
-    def valid_directions
-      DIRECTIONS.values
-    end
+  def == other
+    direction == other.direction
   end
 end

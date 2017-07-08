@@ -2,41 +2,44 @@ class Position
   attr_accessor :x, :y, :validator
 
   def initialize x, y
-    x = x.to_i
-    y = y.to_i
     @validator = PositionValidator.new
+    @x = x.to_i
+    @y = y.to_i
+  end
 
-    if validator.valid? x: x, y: y
-      @x = x
-      @y = y
-    end
+  def valid?
+    validator.valid? x: x, y: y
   end
 
   def to_s
-    "x: #{x}, y: #{y}"
+    "(x: #{x}, y: #{y})"
   end
 
   def left
-    validator.when_horizontal_valid?(x) do
+    validator.when_horizontal_valid?(x.pred) do
       @x -= 1
     end
   end
 
   def right
-    validator.when_horizontal_valid?(x) do
+    validator.when_horizontal_valid?(x.next) do
       self.x += 1
     end
   end
 
   def up
-    validator.when_vertical_valid?(y) do
+    validator.when_vertical_valid?(y.next) do
       @y += 1
     end
   end
 
   def down
-    validator.when_vertical_valid?(y) do
+    validator.when_vertical_valid?(y.pred) do
       @y -= 1
     end
+  end
+
+  def == other
+    x == other.x && y == other.y
   end
 end
