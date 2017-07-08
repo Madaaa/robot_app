@@ -11,15 +11,15 @@ class Robot
   end
 
   def move
-    moves.fetch(facing.direction).call(position)
+    placed? && moves.fetch(facing.direction).call(position)
   end
 
   def left
-    facing.previous
+    placed? && facing.previous
   end
 
   def right
-    facing.next
+    placed? && facing.next
   end
 
   def report
