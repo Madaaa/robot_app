@@ -2,5 +2,6 @@
 require_relative "../config/application"
 require "irb"
 require "irb/completion"
+IRB.conf[:HISTORY_FILE] = '.irb_history'
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.start
