@@ -4,4 +4,20 @@ require "irb"
 require "irb/completion"
 IRB.conf[:HISTORY_FILE] = '.irb_history'
 IRB.conf[:SAVE_HISTORY] = 1000
-IRB.start
+
+commander = Commander.new
+
+loop do
+  putc ">"
+  putc " "
+  input = gets.chomp
+
+  cmnd, *args = input.split(/[, ]/).reject(&:empty?)
+  result = commander.execute(cmnd.to_s.downcase.to_sym, args)
+
+  puts result
+end
+
+# IRB.start
+
+

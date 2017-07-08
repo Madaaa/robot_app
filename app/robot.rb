@@ -3,19 +3,23 @@ class Robot
 
   def place x, y, facing
     @position = Position.new(x, y)
-    @facing = facing
+    @facing = Facing.new(facing)
+  end
+
+  def placed?
+    @position && @facing
   end
 
   def move
-    facings.fetch(facing).call(position)
+    moves.fetch(facing.direction).call(position)
   end
 
   def left
-    Direction.new(facing).previous
+    facing.previous
   end
 
   def right
-    Direction.new(facing).next
+    facing.next
   end
 
   def report
@@ -26,8 +30,12 @@ class Robot
     "#{position}, facing: #{facing}"
   end
 
+  def inspect
+    "<Robot##{object_id},#{self}> "
+  end
+
   private
-  def facings
+  def moves
     {
       north: ->(position) { position.up },
       south: ->(position) { position.down },

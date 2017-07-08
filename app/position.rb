@@ -2,6 +2,8 @@ class Position
   attr_accessor :x, :y, :validator
 
   def initialize x, y
+    x = x.to_i
+    y = y.to_i
     @validator = PositionValidator.new
 
     if validator.valid? x: x, y: y
