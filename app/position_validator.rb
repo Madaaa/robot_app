@@ -1,10 +1,14 @@
 class PositionValidator
+  def initialize config = Application::TABLE
+    @config = config
+  end
+
   def horizontal
-    0..4
+    0..(@config.width - 1)
   end
 
   def vertical
-    0..4
+    0..(@config.height - 1)
   end
 
   def when_vertical_valid? val

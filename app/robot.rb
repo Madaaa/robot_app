@@ -32,9 +32,7 @@ class Robot
   end
 
   def report
-    table = 5.times.map { Array.new(5, '-') }
-    table[position.x][position.y] = facing.to_code
-    table.inject('') { |acc, row| acc << '|' << row.join('') << "|\n" }
+    puts Table.new(position, facing).report
   end
 
   def to_s
