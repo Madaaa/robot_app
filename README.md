@@ -4,7 +4,7 @@
 
 - Read from stdin
 
-```(bash)
+```bash
 $> bin/console
 > PLACE 1, 1, NORTH
 > MOVE
@@ -21,7 +21,7 @@ $> bin/console
 
 - Read from file
 
-```(bash)
+```bash
 $>  bin/console tests.txt
 > place 0, 0, north
 position: (x: 0, y: 0), facing: north
