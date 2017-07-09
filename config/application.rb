@@ -1,11 +1,12 @@
 require "bundler"
+require "ostruct"
 Bundler.setup(:default)
 Bundler.require(:default)
 
 $LOAD_PATH.unshift File.expand_path("../../app", __FILE__)
 
 module Application
-  TABLE_SIZE = 5
+  TABLE = OpenStruct.new(width: 5, height: 5)
 end
 
 require "position_validator"

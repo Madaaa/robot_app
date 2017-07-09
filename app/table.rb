@@ -8,7 +8,7 @@ class Table
 
   def report
     @table[x_axis][y_axis] = @facing.to_code
-    @table.inject('') { |acc, row| acc << "|#{row.join('')}|\n" }
+    @table.inject('') { |acc, row| acc << "\t|#{row.join('')}|\n" }
   end
 
   def x_axis

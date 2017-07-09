@@ -4,6 +4,12 @@ require "readline"
 
 commander = Commander.new
 
+Readline.input = if ARGV.any?
+  File.new(ARGV[0])
+else
+  $stdin
+end
+
 while(input = Readline.readline("> ", true)) do
   cmnd, *args = input.split(/[, ]/).reject(&:empty?)
   result = commander.execute(cmnd, args)
