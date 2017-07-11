@@ -23,9 +23,6 @@ class Facing
     valid_directions.include? direction
   end
 
-  def order
-    directions.invert[direction]
-  end
 
   def next
     @direction = directions[order.next.modulo(directions.size)]
@@ -35,13 +32,6 @@ class Facing
     @direction = directions[order.pred.modulo(directions.size)]
   end
 
-  def directions
-    DIRECTIONS.freeze
-  end
-
-  def valid_directions
-    DIRECTIONS.values
-  end
 
   def to_s
     direction.to_s
@@ -53,5 +43,18 @@ class Facing
 
   def == other
     direction == other.direction
+  end
+  
+  private
+  def order
+    directions.invert[direction]
+  end
+
+  def directions
+    DIRECTIONS.freeze
+  end
+
+  def valid_directions
+    DIRECTIONS.values
   end
 end

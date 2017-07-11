@@ -8,7 +8,7 @@ class Position
   end
 
   def valid?
-    validator.valid? x: x, y: y
+    validator.valid? x, y
   end
 
   def to_s
@@ -23,7 +23,7 @@ class Position
 
   def right
     validator.when_horizontal_valid?(x.next) do
-      self.x += 1
+      @x += 1
     end
   end
 
