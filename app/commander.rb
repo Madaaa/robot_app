@@ -23,8 +23,6 @@ class Commander
 
     if length == args.length
       robot.public_send(command, *args)
-    else
-      "Invalid command\n\n#{help}"
     end
   end
 end

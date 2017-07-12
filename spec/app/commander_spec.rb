@@ -20,7 +20,7 @@ RSpec.describe Commander do
       it { expect(commander.robot.facing).to eq(Facing.new(:north)) }
     end
 
-    context 'invalid context' do
+    xcontext 'invalid context' do
       context 'unknown command' do
         it { expect(commander.execute('unknown')).to start_with('Invalid command') }
       end

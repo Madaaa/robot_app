@@ -9,7 +9,7 @@ class Robot
       @position, @facing = new_position, new_facing
     end
 
-    self
+    nil
   end
 
   def placed?
@@ -18,21 +18,21 @@ class Robot
 
   def move
     placed? && moves.fetch(facing.direction).call(position)
-    self
+    nil
   end
 
   def left
     placed? && facing.previous
-    self
+    nil
   end
 
   def right
     placed? && facing.next
-    self
+    nil
   end
 
   def report
-    puts Table.new(position, facing).report
+    to_s
   end
 
   def to_s
